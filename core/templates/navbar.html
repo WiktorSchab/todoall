@@ -1,0 +1,22 @@
+<nav>
+    <!-- home page-->
+    <div>
+        <a href='{% url "home" %}'>todoall</a>
+    </div>
+
+    <!-- Program functions -->
+    <div>
+        <a href='#'>mytodo</a>
+        <a href='#'>todoproject</a>
+    </div>
+
+    <!-- User managment -->
+    <div>
+        {% if not user.is_authenticated %}
+            <a href='#'>login</a>
+            <a href='#'>register</a>
+        {% else %}
+            <a href='#'>logout</a>
+        {% endif %}
+    </div>
+</nav>    

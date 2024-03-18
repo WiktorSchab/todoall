@@ -1,0 +1,43 @@
+nav{
+    display: flex;
+    flex-direction: row;
+    width: calc(100% - 90px);
+    height: 100px;
+    padding-left: 45px;
+    padding-right: 45px;
+
+    background: var(--bg-gradient);
+}
+
+nav div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav div:first-child{
+    justify-content: left;
+    width: 20%;
+}
+nav div:nth-child(2){
+    justify-content: left;
+    width: 45%;
+}
+nav div:nth-child(3){
+    justify-content: right;
+    width: 35%;
+}
+
+nav div a{
+    color: white !important;
+    font-size: 40px;
+}
+
+nav div:first-child a{
+    letter-spacing: 0.15em;
+}
+
+nav div a:nth-child(2){
+    margin-left: 25px;
+}
+
