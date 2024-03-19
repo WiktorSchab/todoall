@@ -1,6 +1,20 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block additional_styles %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
 
 {% block content %}
     {% include 'navbar.html' %}
-    <h1>Test</h1>
+    <section class='main-content'>
+        <div>
+            <h1>What is todoall</h1>
+            </br>
+            <p>TodoAll is a web application that offers users two main features: a private task list and a project module. The private list allows users to manage their personal tasks, while the project feature enables the creation of projects involving multiple people, with up to three shared boards per project. With the project feature, users can effectively coordinate team activities and achieve larger goals. To access todoproject you have to be logged. </p>
+            </br></br>
+            <p>TodoAll was conceived as a school project, featuring a versatile tech stack including Figma for design, Django for backend, jQuery for frontend, and Docker for deployment, ensuring a seamless and efficient production process.</p>     
+        </div>
+    </section>    
 {% endblock %}

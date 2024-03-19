@@ -1,0 +1,17 @@
+section div{
+    display: flex;
+    flex-direction: column;
+    min-height: 688px;
+    margin-top: 50px;
+}
+
+section div h1{
+    font-size: 40px;
+    color: white;
+}
+
+section div p{
+    font-size: 20px;
+    color: white;
+    text-align: justify;
+}
