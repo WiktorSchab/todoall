@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 import datetime
 
 
-class PrivateTask(models.Model):
+class BaseTask(models.Model):
     COLOR_CHOICES = [
         ('white', 'White'),
         ('yellow', 'Yellow'),
@@ -12,7 +12,6 @@ class PrivateTask(models.Model):
         ('red', 'Red'),
     ]
 
-    owner = models.ForeignKey(User ,on_delete=models.CASCADE)
     title = models.CharField(max_length=32, blank=False)
     description = models.CharField(max_length=512, blank=True)
     color = models.CharField(max_length=16, choices=COLOR_CHOICES, blank=False)
@@ -20,7 +19,12 @@ class PrivateTask(models.Model):
     hour = models.TimeField(blank=False, default=datetime.time(hour=23, minute=59))
     done = models.BooleanField(blank=False, default=False)
 
+    class Meta:
+        abstract = True
+
+class PrivateTask(BaseTask):
+    owner = models.ForeignKey(User ,on_delete=models.CASCADE)
+
     def __str__(self):
         task_status = "completed" if self.done else "not completed"
-
         return f"{self.owner} | {self.title} | Date: {self.date}; Time: {self.hour} | Status: {task_status}"
