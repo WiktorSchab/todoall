@@ -1,0 +1,65 @@
+section {
+    display: flex;
+    justify-content: center;
+    min-height: 738px;
+}
+
+section > div{
+    display: flex;
+    flex-direction: column;
+    padding-top: 100px;
+    width: 500px;
+}
+
+section h1{
+    font-size: 40px;
+    color: white;
+}
+
+section form{
+    width: 100%;
+}
+
+.form-group{
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.form-group input{
+    width: Calc(100% - 20px);
+    height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    
+    background-color: white;
+
+    border: 0 none transparent;
+    border-radius: 32px;
+    outline: none;
+}
+
+/* Styles for placeholders in fields */
+.form-group input::-webkit-input-placeholder { 
+    color: var(--bg-light-gray);
+}
+
+/* Styles for errors for fields */
+.form-group .text-danger{
+    padding-top: 5px;
+    padding-left: 10px;
+    color: var(--bg-light-gray);
+}
+
+section form button{
+    width: 100px;
+    height: 30px;
+    margin-left: calc(100% - 100px);
+    
+    background-color: white;
+    border: 0 none transparent;
+    border-radius: 32px;
+
+    font-size: 16px;
+
+    cursor: pointer;
+}
