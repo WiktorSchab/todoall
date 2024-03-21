@@ -44,7 +44,7 @@ section form{
 }
 
 /* Styles for errors for fields */
-.form-group .text-danger{
+.text-danger{
     padding-top: 5px;
     padding-left: 10px;
     color: var(--bg-light-gray);

@@ -22,6 +22,10 @@
                             {% endfor %}
                         </div>
                 {% endfor %}
+
+                {% for error in form.non_field_errors %}
+                    <div class="text-danger">{{ error }}</div>
+                {% endfor %}
                 <button type="submit">Send</button>
             </form>     
         </div>  
