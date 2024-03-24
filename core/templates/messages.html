@@ -1,0 +1,9 @@
+{% for message in messages %}
+    <div class='message {{ message.tags }}'>
+        <div class="message_text">
+            <h1>{{ message.tags }}</h1>
+            <p>{{ message }}</p>
+        </div>
+        <i class="bi bi-x-lg close-button"></i>
+    </div>
+{% endfor %}

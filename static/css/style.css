@@ -46,3 +46,68 @@ footer div a i{
     font-size: 50px;
 }
 
+.message{
+    display: flex;
+    align-items: center;
+    position: absolute;
+
+    /* Width - padding * 2 */
+    width: Calc(80% - 35px * 2);
+    padding-left: 35px;
+    padding-right: 35px;
+    /* Height - border * 2 */
+    height: Calc(75px - 2.5px * 2);
+
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+
+    background-color: var(--bg-gray2);
+
+    border-radius: 32px;
+    border: 2.5px solid white;
+}
+
+.message div{
+    display: flex;
+    align-items: center;
+    width: Calc(100% - 75px);
+}
+
+.message div h1{
+    text-transform: capitalize;
+    font-size: 40px;
+    color: white;
+}
+
+.message div p{
+    margin-left: 30px;
+    font-size: 20px;
+    color: white;
+}
+
+.message i{
+    margin-left: 30px;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+}
+
+.info{
+    border-color: var(--blue) !important;
+}
+
+.success{
+    border-color: var(--green) !important;
+}
+
+.warning{
+    border-color: var(--yellow) !important;
+}
+
+.error{
+    border-color: var(--red) !important;
+}
