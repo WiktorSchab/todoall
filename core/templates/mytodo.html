@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block additional_styles %}
+    <link rel="stylesheet" href="{% static 'css/mytodo.css' %}">
+{% endblock %}
+
+
+{% block content %}
+    {% include 'navbar.html' %}
+    <section class='main-content'>
+        <div id='todo-list'>
+            <div id='list-title'>
+                <h1>mytodo</h1>
+                <hr/>
+            </div>
+            <div id='new-task-button'>
+                <i class="bi bi-plus-circle-fill add-button"></i>
+            </div>
+
+            <div class='task-day'>
+                <h2>Date</h2>
+                <hr>
+                <div class='single-task'>
+                    <!-- Title & end hour of task -->
+                    <h3>Title</h3>
+                    <!-- Description of task -->
+                    <p>Description</p>
+                    <!-- Control buttons of task -->
+                    <div>
+                        <div>
+                            <i class="bi bi-check"></i>
+                        </div>
+
+                        <div>
+                            <i class="bi bi-trash"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>    
+{% endblock %}

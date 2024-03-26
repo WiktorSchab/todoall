@@ -46,3 +46,6 @@ def logout_user(request):
     logout(request)
     messages.success(request, 'Logout was successful')
     return redirect('home')
+
+def mytodo(request):
+    return render(request, 'mytodo.html')

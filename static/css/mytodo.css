@@ -1,0 +1,127 @@
+.main-content{
+    display: flex;
+    justify-content: center;
+}
+
+#todo-list{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    /* Width - 2 * padding */
+    width: Calc(800px - 2 * 50px);
+    padding-left: 50px;
+    padding-right: 50px;
+    min-height: 689px;
+
+    background-color: var(--bg-gray3);
+    border-radius: var(--small-radius);
+}
+
+#list-title{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 35px;
+}
+
+#list-title h1{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+
+    font-size: 40px;
+    color: white;
+}
+
+
+.add-button{
+    color: var(--bg-gray2);
+    font-size: 35px;
+    cursor: pointer;
+}
+#new-task-button{
+    position: absolute;
+    right: 0;
+    margin-right: 12.5px;
+    margin-top: 12.5px;
+}
+
+
+.task-day{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.task-day h2{
+    margin-bottom: 5px;
+
+    color: white;
+    font-size: 20px;
+    text-transform: capitalize;
+}
+
+.task-day hr{
+    width: 300px;
+}
+
+.single-task{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: calc(100% - 2 * 10px);
+    margin-top: 20px;
+    padding: 10px;
+
+    background-color: var(--bg-white);
+    border-radius: var(--medium-radius);
+}
+
+.single-task h3{
+    width: Calc(100% - 65% - 112px);
+    font-size: 20px;
+}
+
+.single-task p{
+    width: Calc(100% - 15% - 112px);
+
+    font-size: 13px;
+    text-align: justify;
+    text-justify: inter-word;
+    word-break: break-all;
+}
+
+.single-task > div{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+
+    margin-left: 10px;
+}
+
+/* Background of task control buttons */
+.single-task div div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    
+    padding: 2.5px;
+    margin-left: 5px;
+    margin-right: 5px;
+
+    background-color: var(--bg-gray3);
+    border-radius: 50%;
+}
+
+.single-task div div i {
+    font-size: 15px;
+    cursor: pointer;
+    color: var(--bg-white);
+}
