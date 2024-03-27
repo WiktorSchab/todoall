@@ -78,7 +78,7 @@
     padding: 10px;
 
     background-color: var(--bg-white);
-    border-radius: var(--medium-radius);
+    border-radius: var(--small-radius);
 }
 
 .single-task h3{
@@ -124,4 +124,160 @@
     font-size: 15px;
     cursor: pointer;
     color: var(--bg-white);
+}
+
+
+.create-task{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    /* Width - padding * 2 */
+    width: Calc(865px - 50px * 2);
+
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 25px;
+
+    background-color: var(--bg-gray5);
+
+    border-top-left-radius: var(--small-radius);
+    border-top-right-radius: var(--small-radius);
+
+    bottom: 0;
+}
+
+.create-task i{
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    color: white;
+    font-size: 25px;
+
+    cursor: pointer;
+}
+
+.create-task form{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin-right: 10%;
+    gap: 20px;
+}
+
+.color-border-form h3{
+    text-align: center;
+}
+
+.create-task form input{
+    background-color: var(--bg-white);
+    border: 0 solid transparent;
+
+    padding: 10px;
+    font-size: 16px;
+
+    outline: none;
+    border-radius: var(--small-radius);
+}
+
+/* Styles to container with hour and date inputs */
+.create-task form .date-form{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Styles for date and hour input */
+.create-task form .date-form input{
+    width: 42.5%;
+}
+
+/* Styles for container radio buttons in container and title */
+.create-task form .color-border-form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Styles for container with radio buttons */
+#color-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 25px;
+}
+
+.radio-button-container{
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
+.radio-button-container input{
+    position: absolute;
+    opacity: 0.2;
+    cursor: pointer;
+    z-index: 5;
+    width: 35px; 
+    height: 35px; 
+    margin: 0; 
+    margin-left: -35px;
+    padding: 0; 
+}
+
+.visible-radio::after{
+    opacity: 1.0;
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 35px; 
+    height: 35px; 
+    background-color: white;
+    border-radius: 50%;
+}
+
+.radio-white::after{
+    background-color: var(--white);
+}
+
+.radio-green::after{
+    background-color: var(--green);
+}
+
+.radio-blue::after{
+    background-color: var(--blue);
+}
+
+.radio-red::after{
+    background-color: var(--red);
+}
+
+.radio-yellow::after{
+    background-color: var(--yellow);
+}
+
+#submit-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    width: 100%;
+}
+
+#submit-container button{
+    width: 100px;
+    height: 30px;
+    background-color: var(--bg-white);
+    border: 0 none transparent;
+    border-radius: 32px;
+    font-size: 16px;
+    cursor: pointer;
 }

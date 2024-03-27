@@ -1,6 +1,13 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django import forms
+from .models import PrivateTask
+
+class RadioSelectNoLabel(forms.RadioSelect):
+	def create_option(self, name, value, label, selected, index, subindex=None, attrs=None):
+		option = super().create_option(name, value, label, selected, index, subindex=subindex, attrs=attrs)
+		option['label'] = ''
+		return option
 
 
 class SignUpForm(UserCreationForm):
@@ -31,4 +38,35 @@ class LoginForm(AuthenticationForm):
 
 		self.fields['username'].widget.attrs['placeholder'] = 'Username'
 		self.fields['password'].widget.attrs['placeholder'] = 'Password'
-        
+
+
+
+class PrivateTaskForm(forms.ModelForm):
+	class Meta:
+		model = PrivateTask
+		fields = ['title', 'description', 'date', 'hour', 'color']
+		widgets = {
+			'date': forms.DateInput(attrs={'type': 'date'}),
+			'hour': forms.DateInput(attrs={'type': 'time'}),
+			'color': RadioSelectNoLabel(choices=PrivateTask.COLOR_CHOICES),
+		}
+		
+	def __init__(self, *args, **kwargs):
+		super(PrivateTaskForm, self).__init__(*args, **kwargs)
+
+		# Deleting labels from fields
+		for field_name, field in self.fields.items():
+			field.widget.attrs['placeholder'] = field.label 
+			field.label = False
+
+		# Deleting empty option in color field
+		self.fields['color'].choices = [(value, label) for value, label in PrivateTask.COLOR_CHOICES[:]]
+
+		for choice_value, choice_label in PrivateTask.COLOR_CHOICES:
+			print(self.fields['color'])
+
+
+
+		
+
+		

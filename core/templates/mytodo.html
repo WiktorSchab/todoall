@@ -4,6 +4,9 @@
 {% block additional_styles %}
     <link rel="stylesheet" href="{% static 'css/mytodo.css' %}">
 {% endblock %}
+{% block additional_scripts %}
+    <script src="{% static 'js/mytodo.js' %}" defer></script>
+{% endblock %}
 
 
 {% block content %}
@@ -15,7 +18,7 @@
                 <hr/>
             </div>
             <div id='new-task-button'>
-                <i class="bi bi-plus-circle-fill add-button"></i>
+                <i class="bi bi-plus-circle-fill add-button" onclick="showFlex('new-task')"></i>
             </div>
 
             <div class='task-day'>
@@ -38,7 +41,34 @@
                     </div>
                 </div>
             </div>
+        </div>
 
+        <div id='new-task' class='create-task'>
+            <i class="bi bi-x-lg close-button"></i>
+            <form>
+                {{ form.title }}
+                {{ form.description }}
+
+                <div class='date-form'>
+                    {{ form.date }}
+                    {{ form.hour }}
+                </div>  
+
+                <div class='color-border-form'>
+                    <h3>Color border</h3>
+                    <div id='color-container'>
+                        {% for choice in form.color %}
+                            <div class='radio-button-container'>
+                                {{ choice.tag }}<span class="visible-radio"></span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div id='submit-container'>
+                    <button type='submit'>Send</button>
+                </div>
+            </form>    
         </div>
     </section>    
 {% endblock %}

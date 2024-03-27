@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from .forms import LoginForm, SignUpForm
+from .forms import LoginForm, SignUpForm, PrivateTaskForm
 
 def home(request):
     return render(request, 'home.html')
@@ -48,4 +48,8 @@ def logout_user(request):
     return redirect('home')
 
 def mytodo(request):
-    return render(request, 'mytodo.html')
+    form = PrivateTaskForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'mytodo.html', context)
