@@ -51,23 +51,29 @@ def logout_user(request):
 
 def mytodo(request):
     if request.method == 'POST':
+        # Creating a form based on data submitted via POST method
         form = PrivateTaskForm(request.POST)
+
         if form.is_valid():
+            # Getting clean data from the form
             title = form.cleaned_data.get('title')
             description = form.cleaned_data.get('description')
             date = form.cleaned_data.get('date')
             hour = form.cleaned_data.get('hour')
             color = form.cleaned_data.get('color')
 
-            """ Checking if user is logged or not
-            if he is data will be stored in db
-            otherwise data will be stored in session on user browser """
+            # Checking if the user is logged in
             if request.user.is_authenticated:
-                print('zalogowany')
+                # If the user is logged in, save the form to the database
+                private_task = form.save(commit=False)
+                private_task.owner = request.user
+                private_task.save()
             else:
+                # If the user is not logged in, save the data in the session
                 if 'private_tasks' not in request.session:
                     request.session['private_tasks'] = [] 
 
+                # Creating a dictionary containing task data
                 data = {
                     'title':title,
                     'description':description,
@@ -76,14 +82,26 @@ def mytodo(request):
                     'hour':hour.isoformat(),
                 }
 
+                # Adding task data to the session
                 request.session['private_tasks'].append(data)
 
+                # Marking the session as modified
                 request.session.modified = True
+   
         return redirect('mytodo')
     else:    
         form = PrivateTaskForm()
 
+        # Checking if the user is logged in
+        if request.user.is_authenticated:
+            # Getting data to display from DB
+            pass
+        else:
+            # Getting data to display from Session
+            pass
+
     context = {
         'form': form,
     }
+
     return render(request, 'mytodo.html', context)
