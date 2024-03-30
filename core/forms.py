@@ -62,9 +62,6 @@ class PrivateTaskForm(forms.ModelForm):
 		# Deleting empty option in color field
 		self.fields['color'].choices = [(value, label) for value, label in PrivateTask.COLOR_CHOICES[:]]
 
-		for choice_value, choice_label in PrivateTask.COLOR_CHOICES:
-			print(self.fields['color'])
-
 
 
 		

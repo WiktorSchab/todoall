@@ -45,7 +45,8 @@
 
         <div id='new-task' class='create-task'>
             <i class="bi bi-x-lg close-button"></i>
-            <form>
+            <form method='POST'>
+                {% csrf_token %}
                 {{ form.title }}
                 {{ form.description }}
 
