@@ -21,26 +21,57 @@
                 <i class="bi bi-plus-circle-fill add-button" onclick="showFlex('new-task')"></i>
             </div>
 
-            <div class='task-day'>
-                <h2>Date</h2>
-                <hr>
-                <div class='single-task'>
-                    <!-- Title & end hour of task -->
-                    <h3>Title</h3>
-                    <!-- Description of task -->
-                    <p>Description</p>
-                    <!-- Control buttons of task -->
-                    <div>
-                        <div>
-                            <i class="bi bi-check"></i>
-                        </div>
+            <!-- Displaying tasks that are after date -->
+            {% if tasks_ended %}
+                <div class='task-day'>
+                    <h2>After Date</h2>
+                    <hr>
+                    {% for task in tasks_ended %}
+                        <div class='single-task'>
+                            <!-- Title & end hour of task -->
+                            <h3>{{ task.title }} [{{ task.date|date:"d.m.Y" }}]</h3>
+                            <!-- Description of task -->
+                            <p>{{ task.description }}</p>
+                            <!-- Control buttons of task -->
+                            <div>
+                                <div>
+                                    <i class="bi bi-check"></i>
+                                </div>
 
-                        <div>
-                            <i class="bi bi-trash"></i>
+                                <div>
+                                    <i class="bi bi-trash"></i>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    {% endfor %}
                 </div>
-            </div>
+            {% endif %}
+            
+            <!-- Displaying pending tasks -->
+            {% for date, tasks in grouped_tasks.items %}
+                <div class='task-day'>
+                    <h2>{{ date}} </h2>
+                    <hr>
+                    {% for task in tasks %}
+                        <div class='single-task' style='border-color:{{task.color}}'>
+                            <!-- Title & end hour of task -->
+                            <h3>{{ task.title }} [{{ task.hour|time:"H:i"  }}]</h3>
+                            <!-- Description of task -->
+                            <p>{{ task.description }}</p>
+                            <!-- Control buttons of task -->
+                            <div>
+                                <div>
+                                    <i class="bi bi-check"></i>
+                                </div>
+
+                                <div>
+                                    <i class="bi bi-trash"></i>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
         </div>
 
         <div id='new-task' class='create-task'>

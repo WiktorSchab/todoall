@@ -73,21 +73,28 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: calc(100% - 2 * 10px);
+    /* 100% - 2 x padding - 2 x border */
+    width: calc(100% - 2 * 10px - 2 * 2px);
     margin-top: 20px;
     padding: 10px;
 
     background-color: var(--bg-white);
     border-radius: var(--small-radius);
+    border-width: 1px;
+    border-style: solid;
 }
 
 .single-task h3{
-    width: Calc(100% - 65% - 112px);
-    font-size: 20px;
+    /* 100% - desciption size - icons size - padding */
+    width: Calc(100% - 65% - 112px - 5px);
+    padding-right: 5px;
+    font-size: 16px;
+    font-weight: 400;
 }
 
 .single-task p{
     width: Calc(100% - 15% - 112px);
+    min-height: 20px;
 
     font-size: 13px;
     text-align: justify;
