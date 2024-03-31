@@ -81,7 +81,7 @@ def mytodo(request):
 
 				# Creating a dictionary containing task data
 				data = {
-					'task_id':'task_id',
+					'id':task_id,
 					'title':title,
 					'description':description,
 					'color':color,
@@ -118,6 +118,7 @@ def mytodo(request):
 				hour_time = datetime.time(hour=hour, minute=minute, second=second)
 
 				private_task = PrivateTask(
+					id=task_data['id'],
 					owner=anonymous_user,
 					title=task_data['title'],
 					description=task_data['description'],
@@ -157,3 +158,18 @@ def mytodo(request):
 	}
 
 	return render(request, 'mytodo.html', context)
+
+def delete_task(request, id):
+	if request.user.is_authenticated:
+		PrivateTask.objects.filter(id=id).delete()
+	else:
+		private_tasks = request.session.get('private_tasks', [])
+
+		for task in private_tasks:
+			if task.get('id') == id:
+				private_tasks.remove(task)
+				request.session['private_tasks'] = private_tasks
+				break
+		request.session.modified = True
+	return redirect('mytodo') 
+

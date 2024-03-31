@@ -7,4 +7,5 @@ urlpatterns = [
     path('login', views.login_user, name='login'),
     path('register', views.register_user, name='register'),
     path('mytodo', views.mytodo, name='mytodo'),
+    path('delete_task/<id>', views.delete_task, name='delete_task')
 ]

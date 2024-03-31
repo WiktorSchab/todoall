@@ -35,11 +35,14 @@
                             <!-- Control buttons of task -->
                             <div>
                                 <div>
-                                    <i class="bi bi-check"></i>
+                                    <a href=''>
+                                        <i class="bi bi-check"></i>
+                                    </a>
                                 </div>
-
                                 <div>
-                                    <i class="bi bi-trash"></i>
+                                    <a href='{% url "delete_task" task.id %}'>
+                                        <i class="bi bi-trash"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -61,11 +64,14 @@
                             <!-- Control buttons of task -->
                             <div>
                                 <div>
-                                    <i class="bi bi-check"></i>
+                                    <a href=''>
+                                        <i class="bi bi-check"></i>
+                                    </a>
                                 </div>
-
                                 <div>
-                                    <i class="bi bi-trash"></i>
+                                    <a href='{% url "delete_task" task.id %}'>
+                                        <i class="bi bi-trash"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
