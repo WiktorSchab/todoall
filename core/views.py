@@ -128,10 +128,11 @@ def mytodo(request):
 					done=task_data['done'],
 				)
 
-				if private_task.date < datetime.date.today():
-					tasks_ended.append(private_task)
-				else:
-					tasks.append(private_task)
+				if private_task.done == False:
+					if private_task.date < datetime.date.today():
+						tasks_ended.append(private_task)
+					else:
+						tasks.append(private_task)
 
 		# Simple algoritm to group tasks by date
 		grouped_tasks = {}
@@ -173,3 +174,17 @@ def delete_task(request, id):
 		request.session.modified = True
 	return redirect('mytodo') 
 
+def complete_task(request, id):
+	if request.user.is_authenticated:
+		PrivateTask.objects.filter(id=id).update(done=True)
+	else:
+		private_tasks = request.session.get('private_tasks', [])
+
+		for task in private_tasks:
+			if task.get('id') == id:
+				task['done'] = True
+				request.session['private_tasks'] = private_tasks
+				break
+		request.session.modified = True
+
+	return redirect('mytodo') 
