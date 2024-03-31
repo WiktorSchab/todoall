@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from .forms import LoginForm, SignUpForm, PrivateTaskForm
 from .models import PrivateTask, BaseTask
 import datetime
+import uuid
 
 def home(request):
 	return render(request, 'home.html')
@@ -64,6 +65,9 @@ def mytodo(request):
 			color = form.cleaned_data.get('color')
 			done = False
 
+			next_id = len(request.session.get('private_tasks', [])) + 1
+			task_id = str(uuid.uuid4())
+
 			# Checking if the user is logged in
 			if request.user.is_authenticated:
 				# If the user is logged in, save the form to the database
@@ -77,6 +81,7 @@ def mytodo(request):
 
 				# Creating a dictionary containing task data
 				data = {
+					'task_id':'task_id',
 					'title':title,
 					'description':description,
 					'color':color,
@@ -104,8 +109,6 @@ def mytodo(request):
 			anonymous_user = User.objects.get(username='anonymous')
 			tasks = []
 			tasks_ended = []
-
-			print(request.session.get('private_tasks', []))
 
 			private_tasks_data = request.session.get('private_tasks', [])
 			for task_data in private_tasks_data:
