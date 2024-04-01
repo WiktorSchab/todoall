@@ -8,7 +8,8 @@
 {% block content %}
     {% include 'navbar.html' %}
     <section class='main-content'>
-        <div class='proj-tile'>
+        <div id='grid-proj-container'>
+            <div class='proj-tile'>
             <h2>title</h2>
             <hr>
             <ul>
@@ -16,42 +17,66 @@
                 <li>1/2 closest task</li>   
             </ul>   
             <p>Proj owner</p> 
+            </div>
+            <div class='proj-tile'>
+                <h2>title</h2>
+                <hr>
+                <ul>
+                    <li>1/2 closest task</li>
+                    <li>1/2 closest task</li>   
+                </ul>   
+                <p>Proj owner</p> 
+            </div>
+            <div class='proj-tile'>
+                <h2>title</h2>
+                <hr>
+                <ul>
+                    <li>1/2 closest task</li>
+                    <li>1/2 closest task</li>   
+                </ul>   
+                <p>Proj owner</p> 
+            </div>
+            <div class='proj-tile'>
+                <h2>title</h2>
+                <hr>
+                <ul>
+                    <li>1/2 closest task</li>
+                    <li>1/2 closest task</li>   
+                </ul>   
+                <p>Proj owner</p> 
+            </div>
+            <div class='proj-tile'>
+                <h2>title</h2>
+                <hr>
+                <ul>
+                    <li>1/2 closest task</li>
+                    <li>1/2 closest task</li>   
+                </ul>   
+                <p>Proj owner</p> 
+            </div>
         </div>
-        <div class='proj-tile'>
-            <h2>title</h2>
+
+        <div id='buttons-container'>
+            <div id='notification-container'>
+                <p>2</p>
+                <i class="bi bi-bell"></i>
+            </div>
+            <div>
+                <i class="bi bi-plus-circle" onclick="showFlex('new-project-container')"></i>
+            </div>
+        </div>    
+    </section> 
+
+    <!-- New project form (with blur for the whole page) -->
+    <div id='new-project-container'>
+        <i class="bi bi-x-lg close-button"></i>
+
+        <form id='new-project-form'>
+            {% csrf_token %}
+            <h3>New project</h3>
             <hr>
-            <ul>
-                <li>1/2 closest task</li>
-                <li>1/2 closest task</li>   
-            </ul>   
-            <p>Proj owner</p> 
-        </div>
-        <div class='proj-tile'>
-            <h2>title</h2>
-            <hr>
-            <ul>
-                <li>1/2 closest task</li>
-                <li>1/2 closest task</li>   
-            </ul>   
-            <p>Proj owner</p> 
-        </div>
-        <div class='proj-tile'>
-            <h2>title</h2>
-            <hr>
-            <ul>
-                <li>1/2 closest task</li>
-                <li>1/2 closest task</li>   
-            </ul>   
-            <p>Proj owner</p> 
-        </div>
-        <div class='proj-tile'>
-            <h2>title</h2>
-            <hr>
-            <ul>
-                <li>1/2 closest task</li>
-                <li>1/2 closest task</li>   
-            </ul>   
-            <p>Proj owner</p> 
-        </div>
-    </section>    
+            <input type='text' placeholder='Project name'>
+            <button type='submit'>Send</button>
+        </form>
+    </div>       
 {% endblock %}

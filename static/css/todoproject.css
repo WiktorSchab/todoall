@@ -1,13 +1,20 @@
 section{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    justify-items: center;
+    position: relative;
+
+    min-height: 638px;
     padding-top: 50px;
     padding-bottom: 50px;
+}
+
+#grid-proj-container{
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    
 
     row-gap: 20px;
     column-gap: 20px;
-    min-height: 552px;
 }
 
 .proj-tile{
@@ -56,6 +63,118 @@ section{
     color: white;
     font-size: 16px;
     text-align: center;
+}
+
+#buttons-container{
+    position: absolute;
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+    bottom: 5%;
+}
+
+#buttons-container i {
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Container where its notification button and number of notifications */
+#notification-container{
+    position: relative;
+}
+#notification-container p {
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: -20px;
+
+    text-align: center;
+
+    color: white;
+}
+
+/* Blur for the whole screen were new-project-form is */
+#new-project-container{
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    top: 0;
+
+    background-color: rgba(0,0,0,0.4);
+    backdrop-filter: blur(2px);
+
+    z-index: 100;
+}
+
+#new-project-container i{
+    color: white;
+    margin-top: 25px;
+    margin-left: Calc(100% - 25px - 40px);
+    margin-right: 25px;
+
+    font-size: 40px;
+    cursor: pointer;
+}
+
+#new-project-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: Calc(700px - 1 * 2px);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 100px;
+    /* Object centered */
+    margin-left: calc(50% - (700px / 2));
+
+    background-color: var(--bg-gray4);
+    border: 1px solid white;
+    border-radius: var(--small-radius);
+}
+
+#new-project-form h3{
+    text-align: center;
+    font-size: 40px;
+    color: black;
+    font-weight: 500;
+}
+
+#new-project-form hr{
+    width: 40%;
+    border-color: black;
+    border-width: 1px;
+
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+#new-project-form input{
+    width: 80%;
+    height: 30px;
+    background-color: var(--bg-white);
+    border: 0 solid transparent;
+
+    padding: 10px;
+    font-size: 16px;
+
+    outline: none;
+    border-radius: var(--small-radius);
+}
+
+#new-project-form button{
+    width: 100px;
+    height: 30px;
+    margin-top: 45px;
+
+    background-color: var(--bg-white);
+    border: 0 none transparent;
+    border-radius: 32px;
+
+    font-size: 16px;
+    cursor: pointer;
 }
 
 @media (max-width: 990px){

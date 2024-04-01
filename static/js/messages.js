@@ -12,3 +12,10 @@ for (i=0; i < closeButtons.length; i++){
         }, 400);
     });
 }
+
+function showFlex(elementId) {
+    let obj = document.getElementById(elementId);
+    
+    obj.style.display = 'flex';
+    obj.style.animation = 'fadingIn 0.4s linear forwards'
+}
