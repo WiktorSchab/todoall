@@ -12,3 +12,4 @@ class PrivateTaskAdmin(admin.ModelAdmin):
         return f"{obj.date} {obj.hour.strftime('%H:%M')}"
 
     date_time.admin_order_field = 'date' 
+    

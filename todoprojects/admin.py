@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Project, ProjectMember, ProjectTable, ProjectTask
+from .models import Project, ProjectMember, ProjectTable, ProjectTask, Notification
 
 
 @admin.register(Project)
@@ -28,3 +28,8 @@ class ProjectTaskAdmin(admin.ModelAdmin):
         return f"{obj.date} {obj.hour.strftime('%H:%M')}"
 
     date_time.admin_order_field = 'date' 
+
+@admin.register(Notification)
+class NotificationAdmin(admin.ModelAdmin):
+    list_filter = ('notification', 'created_at')
+    search_fields = ('sender__username', 'receiver__username')
