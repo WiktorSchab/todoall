@@ -71,11 +71,11 @@
     <div id='new-project-container'>
         <i class="bi bi-x-lg close-button"></i>
 
-        <form id='new-project-form'>
+        <form id='new-project-form' method='POST'>
             {% csrf_token %}
             <h3>New project</h3>
             <hr>
-            <input type='text' placeholder='Project name'>
+            {{ NewProjectForm }}
             <button type='submit'>Send</button>
         </form>
     </div>
