@@ -59,7 +59,7 @@
         <div id='buttons-container'>
             <div id='notification-container'>
                 <p>2</p>
-                <i class="bi bi-bell"></i>
+                <i class="bi bi-bell" onclick="showFlex('notifications-tile')"></i>
             </div>
             <div>
                 <i class="bi bi-plus-circle" onclick="showFlex('new-project-container')"></i>
@@ -78,5 +78,29 @@
             <input type='text' placeholder='Project name'>
             <button type='submit'>Send</button>
         </form>
-    </div>       
+    </div>
+    
+    <!-- Side tile with notifications -->
+    <div id='notifications-tile'>
+        <i class="bi bi-x-lg close-button"></i>
+
+        <div id='notification-content'>
+            <h3>Project notifications</h3>
+            <hr>
+
+            <div class='notification'>
+                <p>User kicked you from proj_name</p>
+            </div>
+
+            <div class='notification notification-question'>
+                <p>User invites you to proj_name</p>
+                <div class='cicle notification-accept'><i class="bi bi-check"></i></div>
+                <div class='cicle notification-decline'><i class="bi bi-x-lg"></i></div>
+            </div>
+
+            <div class='notification'>
+                <p>User kicked you from proj_name</p>
+            </div>
+        </div>
+    </div>    
 {% endblock %}

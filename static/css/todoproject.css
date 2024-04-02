@@ -96,7 +96,7 @@ section{
 
 /* Blur for the whole screen were new-project-form is */
 #new-project-container{
-    position: absolute;
+    position: fixed;
     display: none;
     flex-direction: column;
     width: 100%;
@@ -175,6 +175,90 @@ section{
 
     font-size: 16px;
     cursor: pointer;
+}
+
+#notifications-tile{
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    top: 180px;
+    height: 450px;
+    width: 300px;
+
+    background-color: var(--bg-white);
+
+    border-radius: 0 var(--small-radius) var(--small-radius) 0;
+}
+
+#notifications-tile > i{
+    margin-top: 5%;
+    margin-left: 85%;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#notification-content{
+    width: Calc(80% + 15px);
+}
+
+#notification-content h3{
+    font-size: 20px;
+}
+
+#notification-content hr{
+    border-color: black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#notification-content .notification{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 15px;
+    margin-bottom: 20px;
+
+    background-color: var(--bg-gray4);
+
+    border-radius: 0 var(--small-radius) var(--small-radius) 0;
+}
+
+#notification-content .notification p{
+    color: white;
+    font-size: 16px;
+    min-height: 20px;
+    width: 100%;
+}
+
+#notification-content .notification-question {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+#notification-content .cicle{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    padding: 3px;
+    border-radius: 50%;
+
+    cursor: pointer;
+}
+
+#notification-content .notification-accept{
+    background-color: var(--green);
+    right: 40px;
+}
+
+#notification-content .notification-decline{
+    background-color: var(--red);
+    right: 0;
+    bottom: -15px;
+}
+
+#notification-content .cicle i {
+    margin-left: 3px;
+    font-size: 24px;
+    color: white;
 }
 
 @media (max-width: 990px){
