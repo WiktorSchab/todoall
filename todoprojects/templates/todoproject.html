@@ -9,51 +9,24 @@
     {% include 'navbar.html' %}
     <section class='main-content'>
         <div id='grid-proj-container'>
-            <div class='proj-tile'>
-            <h2>title</h2>
-            <hr>
-            <ul>
-                <li>1/2 closest task</li>
-                <li>1/2 closest task</li>   
-            </ul>   
-            <p>Proj owner</p> 
-            </div>
-            <div class='proj-tile'>
-                <h2>title</h2>
-                <hr>
-                <ul>
-                    <li>1/2 closest task</li>
-                    <li>1/2 closest task</li>   
-                </ul>   
-                <p>Proj owner</p> 
-            </div>
-            <div class='proj-tile'>
-                <h2>title</h2>
-                <hr>
-                <ul>
-                    <li>1/2 closest task</li>
-                    <li>1/2 closest task</li>   
-                </ul>   
-                <p>Proj owner</p> 
-            </div>
-            <div class='proj-tile'>
-                <h2>title</h2>
-                <hr>
-                <ul>
-                    <li>1/2 closest task</li>
-                    <li>1/2 closest task</li>   
-                </ul>   
-                <p>Proj owner</p> 
-            </div>
-            <div class='proj-tile'>
-                <h2>title</h2>
-                <hr>
-                <ul>
-                    <li>1/2 closest task</li>
-                    <li>1/2 closest task</li>   
-                </ul>   
-                <p>Proj owner</p> 
-            </div>
+            {% for data in projects_with_table %}
+                <a href='#'>
+                    <div class='proj-tile'>
+                    <h2>{{ data.0 }}</h2>
+                    <hr>
+                    <ul>
+                        {% if not data.1 %}
+                            <p>project does not have any table :(</p>
+                        {% endif %}
+
+                        {% for table in data.1 %}
+                            <li>{{ table }}</li>
+                        {% endfor %}
+                    </ul> 
+                    <p>{{ data.0.owner }}</p> 
+                    </div>
+                </a>
+            {% endfor %}
         </div>
 
         <div id='buttons-container'>

@@ -53,6 +53,10 @@ section{
     height: 85px;
 }
 
+.proj-tile ul p {
+    margin-left: -15%;
+}
+
 .proj-tile ul li{
     color: white;
     font-size: 16px;
