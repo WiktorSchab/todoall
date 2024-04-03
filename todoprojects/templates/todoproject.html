@@ -10,7 +10,7 @@
     <section class='main-content'>
         <div id='grid-proj-container'>
             {% for data in projects_with_table %}
-                <a href='#'>
+                <a href='{% url "singleproject" data.0.id %}'>
                     <div class='proj-tile'>
                     <h2>{{ data.0 }}</h2>
                     <hr>
