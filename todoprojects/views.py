@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
-from .models import ProjectMember, ProjectTable, Project
+from .models import ProjectMember, ProjectTable, Project, ProjectTask
 from .forms import NewProjectForm
 
 @login_required(login_url="/login")
@@ -45,9 +45,38 @@ def singleproject(request, id):
 	project = Project.objects.filter(id=id).first()
 	tables = ProjectTable.objects.filter(project=project).all()
 	
+	
+	data = []
+	for table in tables:
+		tasks = ProjectTask.objects.filter(project_table=table).all()
+		
+		grouped_tasks = {}
+		temp_tasks = []
+		prev_date = ''
+		for task in tasks:
+			if prev_date == '':
+				prev_date = task.date
+
+			if prev_date == task.date:
+				temp_tasks.append(task)
+			else:
+				grouped_tasks[prev_date] = temp_tasks
+				prev_date = task.date
+
+				temp_tasks = []
+				temp_tasks.append(task)
+		grouped_tasks[prev_date] = temp_tasks
+
+		table_data = [table, grouped_tasks]
+
+		print('\n',grouped_tasks,'\n')
+
+		data.append(table_data)
+
+
 	context = {
 		'project': project,
-		'tables': tables,
+		'data': data,
 	}
 
 	return render(request, 'singleproject.html', context)

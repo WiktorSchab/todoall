@@ -9,48 +9,57 @@
     {% include 'navbar.html' %}
     <section class='main-content'>
        <div id='grid-table-container'>
-
+            {% for table_data in data %}
             <div class='single-table'>
-                <h1>Tablea</h1>
-                <div class='task-day'>
-                    <h2>12.02</h2>
-                    <hr>
-                    <div class='single-task' style='border-color:{{task.color}}'>
-                        <!-- Content of task that is always visible -->
-                        <div class='quick-content-task'>
-                            <!-- Title & end hour of task -->
-                            <h3>title [12:33]</h3>
-                            <p>Task for</p>
-                            <!-- Control buttons of task -->
-                            <div>
-                                <div>
-                                    <i class="bi bi-arrow-down"></i>
+                <h1>{{ table_data.0 }}</h1>
+
+                {% for task_day in table_data.1.items %}
+                    <div class='task-day'>
+                        <h2>{{ task_day.0 }}</h2>
+                        <hr>
+                        {% for task in task_day.1 %}
+                            <div class='single-task' style='border-color:{{task.color}}'>
+                                <!-- Content of task that is always visible -->
+                                <div class='quick-content-task'>
+                                    <!-- Title & end hour of task -->
+                                    <h3>{{ task.title }} [{{ task.hour|time:"H:i"  }}]</h3>
+                                    {% if task.assigned_to %}
+                                        <p>for {{ task.assigned_to }}</p>
+                                    {% else %}
+                                        <p>for all</p>
+                                    {% endif %}
+                                    <!-- Control buttons of task -->
+                                    <div>
+                                        <div>
+                                            <i class="bi bi-arrow-down"></i>
+                                        </div>
+                                    </div>
                                 </div>
+
+                                <!-- Content of task that is shows when user click on arrow in quick-content-task -->
+                                <div class='extended-content-task'>
+                                    <p>{{ task.description }}</p>
+
+                                    <div class='control-buttons'>
+                                        <div>
+                                            <a href=''>
+                                                <i class="bi bi-check"></i>
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <a href=''>
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        </div>
+                                    </div>   
+                                </div>    
                             </div>
-                        </div>
-
-                        <!-- Content of task that is shows when user click on arrow in quick-content-task -->
-                        <div class='extended-content-task'>
-                            <p>Temp</p>
-
-                            <div class='control-buttons'>
-                                <div>
-                                    <a href=''>
-                                        <i class="bi bi-check"></i>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href=''>
-                                        <i class="bi bi-trash"></i>
-                                    </a>
-                                </div>
-                            </div>   
-                        </div>    
+                        {% endfor %}
                     </div>
-                </div>
+                {% endfor %}
             </div>
-            <div class='single-table'></div>
-            <div class='single-table'></div>
+            {% endfor %}
+            
        </div>
     </section>   
 {% endblock %}

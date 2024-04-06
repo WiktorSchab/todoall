@@ -67,15 +67,15 @@ section{
 }
 
 .quick-content-task h3{
-    width: 40%;
+    width: 50%;
     margin-bottom: 2px;
     padding-right: 5px;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 400;
 }
 
 .quick-content-task p {
-    width: Calc(100% - 50px - 40%);
+    width: Calc(100% - 50px - 50%);
     margin-bottom: 1px;
     font-size: 16px;
     font-weight: 400;
