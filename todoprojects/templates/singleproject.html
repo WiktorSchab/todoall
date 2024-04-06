@@ -8,6 +8,49 @@
 {% block content %}
     {% include 'navbar.html' %}
     <section class='main-content'>
-       yee
+       <div id='grid-table-container'>
+
+            <div class='single-table'>
+                <h1>Tablea</h1>
+                <div class='task-day'>
+                    <h2>12.02</h2>
+                    <hr>
+                    <div class='single-task' style='border-color:{{task.color}}'>
+                        <!-- Content of task that is always visible -->
+                        <div class='quick-content-task'>
+                            <!-- Title & end hour of task -->
+                            <h3>title [12:33]</h3>
+                            <p>Task for</p>
+                            <!-- Control buttons of task -->
+                            <div>
+                                <div>
+                                    <i class="bi bi-arrow-down"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Content of task that is shows when user click on arrow in quick-content-task -->
+                        <div class='extended-content-task'>
+                            <p>Temp</p>
+
+                            <div class='control-buttons'>
+                                <div>
+                                    <a href=''>
+                                        <i class="bi bi-check"></i>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href=''>
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                            </div>   
+                        </div>    
+                    </div>
+                </div>
+            </div>
+            <div class='single-table'></div>
+            <div class='single-table'></div>
+       </div>
     </section>   
 {% endblock %}

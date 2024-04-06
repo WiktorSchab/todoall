@@ -43,5 +43,11 @@ def todoproject(request):
 @login_required(login_url="/login")
 def singleproject(request, id):
 	project = Project.objects.filter(id=id).first()
-	print(project)
-	return render(request, 'singleproject.html')
+	tables = ProjectTable.objects.filter(project=project).all()
+	
+	context = {
+		'project': project,
+		'tables': tables,
+	}
+
+	return render(request, 'singleproject.html', context)

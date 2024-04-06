@@ -112,7 +112,7 @@
 }
 
 /* Background of task control buttons */
-.single-task div div {
+.single-task div div{
     display: flex;
     justify-content: center;
     align-items: center;
