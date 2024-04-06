@@ -112,7 +112,7 @@ section{
 }
 
 .extended-content-task{
-    display: flex;
+    display: none;
     flex-direction: row;
     width: 100%;
     margin-top: 5px;
