@@ -16,6 +16,9 @@
             {% for table_data in data %}
             <div class='single-table'>
                 <h1>{{ table_data.0 }}</h1>
+                <div class='new-task-table'>
+                    <i class="bi bi-plus-circle" onclick="newTask('new-task', '{{ table_data.0 }}', '{{ table_data.0.id }}')"></i>
+                </div>  
 
                 {% for task_day in table_data.1.items %}
                     <div class='task-day'>
@@ -23,7 +26,7 @@
                         <hr>
 
                         {% for task in task_day.1 %}
-                            <div id='tb{{table_data.0.id}}-tk{{task.id}}' class='single-task' style='border-color:{{task.color}}'>
+                            <div id='tb{{table_data.0.id}}-tk{{task.id}}' class='single-task' style='border-color:{{task.color}}'>  
                                 <!-- Content of task that is always visible -->
                                 <div class='quick-content-task'>
                                     <!-- Title & end hour of task -->
@@ -83,6 +86,38 @@
                 {{ NewProjectTableForm }}
                 <button type='submit'>Send</button>
             </form>
+        </div>
+        
+        <div id='new-task' class='create-task'>
+            <i class="bi bi-x-lg close-button"></i>
+            <form method='POST'>
+                {% csrf_token %}
+                <h1 id='new-task-title'>a</h1>
+                {{ form.table_id }}
+
+                {{ form.title }}
+                {{ form.description }}
+
+                <div class='date-form'>
+                    {{ form.date }}
+                    {{ form.hour }}
+                </div>  
+
+                <div class='color-border-form'>
+                    <h3>Color border</h3>
+                    <div id='color-container'>
+                        {% for choice in form.color %}
+                            <div class='radio-button-container'>
+                                {{ choice.tag }}<span class="visible-radio"></span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div id='submit-container'>
+                    <button type='submit'>Send</button>
+                </div>
+            </form>    
         </div>
     </section>   
 {% endblock %}

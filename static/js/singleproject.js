@@ -29,3 +29,27 @@ function colapseTask(taskId){
     // Hide content
     extendContent.style.display = 'none';
 }
+
+const radioButtonContainer = document.getElementsByClassName('radio-button-container');
+
+for (i=0; i < radioButtonContainer.length; i++){
+    let colorToSet = radioButtonContainer[i].querySelector('input[type="radio"]').value;
+
+    let spanElement = radioButtonContainer[i].querySelector('span');
+    spanElement.classList.add('radio-'+colorToSet);
+}
+
+function newTask(elementId, tableName, tableID) {
+    // Showing obj
+    showFlex(elementId);
+    
+    let obj = document.getElementById(elementId);
+
+    let title = obj.querySelector('#new-task-title');
+    title.innerHTML = tableName;
+
+    // Adding id of table to the invisible input, so data can added only to choosed table
+    let tableIdInput = document.getElementById('id_table_id');
+    tableIdInput.value = tableID;
+    console.log(tableIdInput.value);
+}

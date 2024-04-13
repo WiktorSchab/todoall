@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from .models import ProjectMember, ProjectTable, Project, ProjectTask
-from .forms import NewProjectForm, NewProjectTableForm
+from .forms import NewProjectForm, NewProjectTableForm, TableTaskForm
 
 @login_required(login_url="/login")
 def todoproject(request):
@@ -57,7 +57,7 @@ def singleproject(request, id):
 				table_new.project = project
 				table_new.save()
 				
-				messages.success(request, 'New table has been added the project.')
+				messages.success(request, 'New table has been added succesfully the project.')
 			else:
 				messages.error(request, 'Error was encored. Project was not created.')
 		else:
@@ -99,6 +99,7 @@ def singleproject(request, id):
 		'project': project,
 		'data': data,
 		'NewProjectTableForm': NewProjectTableForm,
+		'form': TableTaskForm,
 	}
 
 	return render(request, 'singleproject.html', context)
