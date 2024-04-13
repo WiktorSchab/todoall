@@ -90,3 +90,12 @@ def singleproject_done(request, id):
 
 	project_id = task.project_table.project.id
 	return redirect('singleproject', project_id)
+
+
+@login_required(login_url="/login")
+def singleproject_delete(request, id):
+    task = ProjectTask.objects.filter(id=id).first()
+    project_id = task.project_table.project.id
+
+    task.delete()
+    return redirect('singleproject', project_id)
