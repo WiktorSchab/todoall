@@ -12,6 +12,13 @@
 {% block content %}
     {% include 'navbar.html' %}
     <section class='main-content'>
+        {% if project.owner == request.user %}
+            <div id='settings-container'>
+                <i class="bi bi-gear" onclick='showFlex("settings")'></i>
+            </div>
+        {% endif %}
+
+
        <div id='grid-table-container'>
             {% for table_data in data %}
             <div class='single-table'>
@@ -75,6 +82,34 @@
        <div id='new-table-button-container'>
             <i class="bi bi-plus-circle" onclick="showFlex('new-project-container')"></i>
         </div>
+        
+        <div id='settings'>
+            <i class="bi bi-x-lg close-button"></i>
+            
+            <div id='settings-tile'>
+                <h2>{{ project }}</h2>
+                <div id='settings-content'>
+                    <ul class='settings-list'>
+                        <p>Info:</p>
+                        <li>Owner: {{ project.owner }}</li>
+                        <li>Created on: {{ project.creation_date }}</li>
+                    </ul>
+
+                    <ul class='settings-list'>
+                        <p>Members:</p>
+                        {% for member in members_list %}
+                            <li>{{ member }}</li>
+                        {% endfor %}
+                    </ul>
+
+                    <ul class='settings-list'>
+                        <p>Invite user:</p>
+                        <input type='user-search' type='text'>
+                        <button>Add user</button>
+                    </ul>
+                </div>
+            </div>    
+        </div>    
 
         <div id='new-project-container'>
             <i class="bi bi-x-lg close-button"></i>

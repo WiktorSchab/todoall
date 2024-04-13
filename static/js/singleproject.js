@@ -51,5 +51,4 @@ function newTask(elementId, tableName, tableID) {
     // Adding id of table to the invisible input, so data can added only to choosed table
     let tableIdInput = document.getElementById('id_table_id');
     tableIdInput.value = tableID;
-    console.log(tableIdInput.value);
 }

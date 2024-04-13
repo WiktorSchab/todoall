@@ -67,7 +67,7 @@ def singleproject(request, id):
 	else:
 		project = Project.objects.filter(id=id).first()
 		tables = ProjectTable.objects.filter(project=project).all()
-
+		members_list = ProjectMember.objects.filter(project=project).all()
 
 		data = []
 		for table in tables:
@@ -97,6 +97,7 @@ def singleproject(request, id):
 
 	context = {
 		'project': project,
+		'members_list':members_list,
 		'data': data,
 		'NewProjectTableForm': NewProjectTableForm,
 		'form': TableTaskForm,

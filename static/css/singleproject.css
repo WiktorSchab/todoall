@@ -432,6 +432,108 @@ section{
 }
 
 
+/* Settings styles */
+#settings-container{
+    display: flex;
+    justify-content: end;
+    margin-bottom: 20px;
+}
+
+#settings-container i {
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+#settings{
+    position: fixed;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0%;
+
+    background-color: rgba(0,0,0,0.4);
+    backdrop-filter: blur(2px);
+
+    z-index: 100;
+}
+
+#settings > i{
+    position: absolute;
+    color: white;
+    top: 10%;
+    margin-left: Calc(100% - 25px - 40px);
+    margin-right: 25px;
+
+    font-size: 40px;
+    cursor: pointer;
+}
+
+#settings-tile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 200px;
+    width: 620px;
+
+    padding: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+
+    background-color: var(--bg-white);
+
+    border: 1px solid black;
+    border-radius: var(--small-radius);
+}
+
+#settings-content{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#settings-content ul{
+    width: Calc(33.3% - 10px);
+    margin-right: 10px;
+}
+
+#settings-content p{
+    font-size: 20px;
+}
+
+#settings-content li{
+    font-size: 16px;
+    margin-left: 30px;
+}
+
+#settings-content input{
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 16px;
+    outline: none;
+    border-radius: var(--small-radius);
+}
+
+#settings-content button{
+    margin-left: 45px;
+    margin-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 16px;
+    outline: none;
+
+    background-color: var(--bg-light-gray);
+    border-color: transparent;
+    border-radius: var(--small-radius);
+
+    cursor: pointer;
+}
+
 @media (max-width: 1350px){
     #grid-table-container{
         grid-template-columns: repeat(2, 1fr);
