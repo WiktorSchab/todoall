@@ -48,7 +48,7 @@ def singleproject(request, id):
 	
 	data = []
 	for table in tables:
-		tasks = ProjectTask.objects.filter(project_table=table).all()
+		tasks = ProjectTask.objects.filter(project_table=table, done=False).all()
 		
 		grouped_tasks = {}
 		temp_tasks = []
@@ -80,3 +80,13 @@ def singleproject(request, id):
 	}
 
 	return render(request, 'singleproject.html', context)
+
+
+@login_required(login_url="/login")
+def singleproject_done(request, id):
+	task = ProjectTask.objects.filter(id=id).first()
+	task.done = True
+	task.save()
+
+	project_id = task.project_table.project.id
+	return redirect('singleproject', project_id)
