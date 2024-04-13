@@ -105,6 +105,30 @@ def singleproject(request, id):
 	return render(request, 'singleproject.html', context)
 
 
+"""Task control views"""
+# Adding new task
+@login_required(login_url="/login")
+def singleproject_new(request, project_id):
+	form = TableTaskForm(request.POST)
+
+	if form.is_valid():
+		task_new = form.save(commit=False)
+
+		table = ProjectTable.objects.filter(id=form.cleaned_data['table_id']).first()
+		project = Project.objects.filter(id=project_id).first()
+
+		task_new.project = project
+		task_new.project_table_id = table.id
+
+		task_new.save()
+		
+	else:
+		messages.error(request, 'An error occurred while creating a new task. The task was not created.')
+
+	print(project_id)
+	return redirect('singleproject', project_id)
+
+# Marking task as done
 @login_required(login_url="/login")
 def singleproject_done(request, id):
 	task = ProjectTask.objects.filter(id=id).first()
@@ -114,7 +138,7 @@ def singleproject_done(request, id):
 	project_id = task.project_table.project.id
 	return redirect('singleproject', project_id)
 
-
+# Deleting task
 @login_required(login_url="/login")
 def singleproject_delete(request, id):
     task = ProjectTask.objects.filter(id=id).first()

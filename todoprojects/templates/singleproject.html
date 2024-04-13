@@ -90,7 +90,7 @@
         
         <div id='new-task' class='create-task'>
             <i class="bi bi-x-lg close-button"></i>
-            <form method='POST'>
+            <form action="{% url 'singleproject_new' project.id %}" method='POST'>
                 {% csrf_token %}
                 <h1 id='new-task-title'>a</h1>
                 {{ form.table_id }}
