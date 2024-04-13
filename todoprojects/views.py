@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from .models import ProjectMember, ProjectTable, Project, ProjectTask
-from .forms import NewProjectForm
+from .forms import NewProjectForm, NewProjectTableForm
 
 @login_required(login_url="/login")
 def todoproject(request):
@@ -42,41 +42,63 @@ def todoproject(request):
 
 @login_required(login_url="/login")
 def singleproject(request, id):
-	project = Project.objects.filter(id=id).first()
-	tables = ProjectTable.objects.filter(project=project).all()
+	if request.method == 'POST':
+		"""Adding new table"""
 	
-	
-	data = []
-	for table in tables:
-		tasks = ProjectTask.objects.filter(project_table=table, done=False).all()
-		
-		grouped_tasks = {}
-		temp_tasks = []
-		prev_date = ''
-		for task in tasks:
-			if prev_date == '':
-				prev_date = task.date
+		project = Project.objects.filter(id=id).first()
+		tables = ProjectTable.objects.filter(project=project).all()
+		tables_count = tables.count()
 
-			if prev_date == task.date:
-				temp_tasks.append(task)
+		# Checking if project did not reach table limit
+		if tables_count < 3:
+			form = NewProjectTableForm(request.POST)
+			if form.is_valid():
+				table_new = form.save(commit=False)
+				table_new.project = project
+				table_new.save()
+				
+				messages.success(request, 'New table has been added the project.')
 			else:
-				grouped_tasks[prev_date] = temp_tasks
-				prev_date = task.date
+				messages.error(request, 'Error was encored. Project was not created.')
+		else:
+			messages.error(request, 'Project has reached table limit.')
 
-				temp_tasks = []
-				temp_tasks.append(task)
-		grouped_tasks[prev_date] = temp_tasks
+		return redirect('singleproject', id)
+	else:
+		project = Project.objects.filter(id=id).first()
+		tables = ProjectTable.objects.filter(project=project).all()
 
-		table_data = [table, grouped_tasks]
 
-		print('\n',grouped_tasks,'\n')
+		data = []
+		for table in tables:
+			tasks = ProjectTask.objects.filter(project_table=table, done=False).all()
 
-		data.append(table_data)
+			grouped_tasks = {}
+			temp_tasks = []
+			prev_date = ''
+			for task in tasks:
+				if prev_date == '':
+					prev_date = task.date
+
+				if prev_date == task.date:
+					temp_tasks.append(task)
+				else:
+					grouped_tasks[prev_date] = temp_tasks
+					prev_date = task.date
+
+					temp_tasks = []
+					temp_tasks.append(task)
+			grouped_tasks[prev_date] = temp_tasks
+
+			table_data = [table, grouped_tasks]
+
+			data.append(table_data)
 
 
 	context = {
 		'project': project,
 		'data': data,
+		'NewProjectTableForm': NewProjectTableForm,
 	}
 
 	return render(request, 'singleproject.html', context)

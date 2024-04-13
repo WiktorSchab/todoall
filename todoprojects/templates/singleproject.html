@@ -13,7 +13,6 @@
     {% include 'navbar.html' %}
     <section class='main-content'>
        <div id='grid-table-container'>
-
             {% for table_data in data %}
             <div class='single-table'>
                 <h1>{{ table_data.0 }}</h1>
@@ -69,5 +68,21 @@
             {% endfor %}
         
        </div>
+
+       <div id='new-table-button-container'>
+            <i class="bi bi-plus-circle" onclick="showFlex('new-project-container')"></i>
+        </div>
+
+        <div id='new-project-container'>
+            <i class="bi bi-x-lg close-button"></i>
+    
+            <form id='new-project-form' method='POST'>
+                {% csrf_token %}
+                <h3>New project</h3>
+                <hr>
+                {{ NewProjectTableForm }}
+                <button type='submit'>Send</button>
+            </form>
+        </div>
     </section>   
 {% endblock %}
