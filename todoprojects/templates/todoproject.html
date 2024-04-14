@@ -61,19 +61,19 @@
             <h3>Project notifications</h3>
             <hr>
 
-            <div class='notification'>
-                <p>User kicked you from proj_name</p>
-            </div>
-
-            <div class='notification notification-question'>
-                <p>User invites you to proj_name</p>
-                <div class='cicle notification-accept'><i class="bi bi-check"></i></div>
-                <div class='cicle notification-decline'><i class="bi bi-x-lg"></i></div>
-            </div>
-
-            <div class='notification'>
-                <p>User kicked you from proj_name</p>
-            </div>
+            {% for notification in notifications %}
+                {% if notification.notification == 'invited' %}
+                    <div class='notification notification-question'>
+                        <p>{{ notification }}</p>
+                        <div class='cicle notification-accept'><i class="bi bi-check"></i></div>
+                        <div class='cicle notification-decline'><i class="bi bi-x-lg"></i></div>
+                    </div>
+                {% else %}
+                    <div class='notification'>
+                        <p>{{ notification }}</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>    
 {% endblock %}

@@ -38,9 +38,12 @@ def todoproject(request):
 
 	form = NewProjectForm()
 
+	notifications = Notification.objects.filter(receiver=request.user).all
+
 	context = {
 		'NewProjectForm':form,
 		'projects_with_table':projects_with_table,
+		'notifications':notifications,
 	}
 	return render(request, 'todoproject.html', context)
 
@@ -185,5 +188,5 @@ def add_user(request):
     	project=project
 	)
 	notification.save()
-	
+
 	return JsonResponse({'req_status': 'User has been invited'})
