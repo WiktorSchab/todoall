@@ -5,7 +5,8 @@ from django.db import transaction
 from django.http import JsonResponse
 import json
 
-from .models import ProjectMember, ProjectTable, Project, ProjectTask
+from django.contrib.auth.models import User
+from .models import ProjectMember, ProjectTable, Project, ProjectTask, Notification
 from .forms import NewProjectForm, NewProjectTableForm, TableTaskForm
 
 @login_required(login_url="/login")
@@ -144,11 +145,11 @@ def singleproject_done(request, id):
 # Deleting task
 @login_required(login_url="/login")
 def singleproject_delete(request, id):
-    task = ProjectTask.objects.filter(id=id).first()
-    project_id = task.project_table.project.id
+	task = ProjectTask.objects.filter(id=id).first()
+	project_id = task.project_table.project.id
 
-    task.delete()
-    return redirect('singleproject', project_id)
+	task.delete()
+	return redirect('singleproject', project_id)
 
 
 # Handles AJAX requests for adding new users to project.
@@ -157,4 +158,32 @@ def add_user(request):
 	data = json.loads(request.body)
 	
 	project_id = data.get('projectID')
-	return JsonResponse({'req_status': 'Request has been completed'})
+	user = data.get('user')
+
+	user_obj  = User.objects.filter(username=user).first()
+
+	# Checking if user exists
+	if not user_obj:
+		return JsonResponse({'req_status': 'That user does not exists'})
+	
+	project = Project.objects.filter(id=project_id).first()
+	
+	# Checking if user is part of project already
+	if ProjectMember.objects.filter(project=project, user=user_obj).exists():
+		return JsonResponse({'req_status': 'That user is already part of project'})
+
+
+	if Notification.objects.filter(receiver=user_obj, notification='invited', project=project).exists():
+		return JsonResponse({'req_status': 'That user already received invitation to the project.'})
+	
+
+	# Creating record & saving it
+	notification = Notification.objects.create(
+    	sender=request.user,
+    	receiver=user_obj,
+    	notification='invited', 
+    	project=project
+	)
+	notification.save()
+	
+	return JsonResponse({'req_status': 'User has been invited'})

@@ -82,10 +82,11 @@ function addUser(projectID) {
     // Getting value from input
     let userInput = document.getElementById('user-input');
     let user = userInput.value;
-    
+
     let csrftoken = getCookie('csrftoken');
     let data = {
         'projectID':projectID,
+        'user':user,
     }
 
     // Sending Ajax req to add_user view
