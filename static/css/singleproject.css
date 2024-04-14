@@ -534,6 +534,12 @@ section{
     cursor: pointer;
 }
 
+#request-status-info{
+    text-align: center;
+    margin-left: -15%;
+    font-size: 16px !important;
+}
+
 @media (max-width: 1350px){
     #grid-table-container{
         grid-template-columns: repeat(2, 1fr);

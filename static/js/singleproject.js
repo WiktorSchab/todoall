@@ -52,3 +52,55 @@ function newTask(elementId, tableName, tableID) {
     let tableIdInput = document.getElementById('id_table_id');
     tableIdInput.value = tableID;
 }
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Szukaj ciasteczka o nazwie csrfToken
+            if (cookie.startsWith(name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+function addUser(projectID) {
+    // Object to display feedback message
+    let requestInfoDisplay = document.getElementById('request-status-info');
+
+    // Creating target url
+    let currentUrl = window.location.href; 
+    let baseUrl = currentUrl.split('/project/')[0]; 
+    let targetUrl = baseUrl + '/add_user'; 
+
+    // Getting value from input
+    let userInput = document.getElementById('user-input');
+    let user = userInput.value;
+    
+    let csrftoken = getCookie('csrftoken');
+    let data = {
+        'projectID':projectID,
+    }
+
+    // Sending Ajax req to add_user view
+    fetch(targetUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify(data) // Adding data
+    })
+    // Displaying feedback
+    .then(response => response.json())
+    .then(data => {
+        requestInfoDisplay.innerHTML = data.req_status;
+    })
+}
+

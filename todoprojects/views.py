@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
+from django.http import JsonResponse
+import json
+
 from .models import ProjectMember, ProjectTable, Project, ProjectTask
 from .forms import NewProjectForm, NewProjectTableForm, TableTaskForm
 
@@ -126,7 +129,6 @@ def singleproject_new(request, project_id):
 	else:
 		messages.error(request, 'An error occurred while creating a new task. The task was not created.')
 
-	print(project_id)
 	return redirect('singleproject', project_id)
 
 # Marking task as done
@@ -147,3 +149,12 @@ def singleproject_delete(request, id):
 
     task.delete()
     return redirect('singleproject', project_id)
+
+
+# Handles AJAX requests for adding new users to project.
+def add_user(request):
+	# Loading data from ajax req
+	data = json.loads(request.body)
+	
+	project_id = data.get('projectID')
+	return JsonResponse({'req_status': 'Request has been completed'})

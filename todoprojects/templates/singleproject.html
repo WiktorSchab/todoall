@@ -104,8 +104,9 @@
 
                     <ul class='settings-list'>
                         <p>Invite user:</p>
-                        <input type='user-search' type='text'>
-                        <button>Add user</button>
+                        <input id='user-input' type='user-search' type='text'>
+                        <button onclick='addUser({{ project.id }})'>Add user</button>
+                        <p id='request-status-info'>aa</p>
                     </ul>
                 </div>
             </div>    
