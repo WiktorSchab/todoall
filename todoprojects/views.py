@@ -182,11 +182,53 @@ def add_user(request):
 
 	# Creating record & saving it
 	notification = Notification.objects.create(
-    	sender=request.user,
-    	receiver=user_obj,
-    	notification='invited', 
-    	project=project
+		sender=request.user,
+		receiver=user_obj,
+		notification='invited', 
+		project=project
 	)
 	notification.save()
 
 	return JsonResponse({'req_status': 'User has been invited'})
+
+
+# Handles AJAX requests for accepting/decling invite
+def decision_invite(request):
+	# Loading data from ajax req
+	data = json.loads(request.body)
+
+	notification_id = data.get('notificationID')
+	decision = data.get('decision')
+	
+	notification = Notification.objects.filter(id=notification_id).first()
+
+	if decision == 'deny':
+		notification_decline = Notification.objects.create(
+			sender=request.user,
+			receiver=notification.sender,
+			notification='declined', 
+			project=notification.project
+		)
+		notification.save()
+	else:
+		project = notification.project
+		user_add = notification.receiver
+
+		# Adding user only if he is not already part of project
+		if not ProjectMember.objects.filter(project=project, user=user_add).exists():
+			project_member = ProjectMember.objects.create(project=project, user=user_add)
+			project_member.save()
+
+			notification_decline = Notification.objects.create(
+				sender=request.user,
+				receiver=notification.sender,
+				notification='accepted', 
+				project=notification.project
+			)
+			notification.save()
+		else:
+			print('User was already part of project')
+
+	notification.delete()
+
+	return JsonResponse({'req_status': 'Request returned'})

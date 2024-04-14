@@ -5,6 +5,10 @@
     <link rel="stylesheet" href="{% static 'css/todoproject.css' %}">
 {% endblock %}
 
+{% block additional_scripts %}
+    <script src="{% static 'js/todoproject.js' %}" defer></script>
+{% endblock %}
+
 {% block content %}
     {% include 'navbar.html' %}
     <section class='main-content'>
@@ -63,10 +67,10 @@
 
             {% for notification in notifications %}
                 {% if notification.notification == 'invited' %}
-                    <div class='notification notification-question'>
+                    <div id='not{{notification.id}}'  class='notification notification-question'>
                         <p>{{ notification }}</p>
-                        <div class='cicle notification-accept'><i class="bi bi-check"></i></div>
-                        <div class='cicle notification-decline'><i class="bi bi-x-lg"></i></div>
+                        <div onclick="invitation({{ notification.id }}, 'accept')" class='cicle notification-accept'><i class="bi bi-check"></i></div>
+                        <div onclick="invitation({{ notification.id }}, 'deny')" class='cicle notification-decline'><i class="bi bi-x-lg"></i></div>
                     </div>
                 {% else %}
                     <div class='notification'>
